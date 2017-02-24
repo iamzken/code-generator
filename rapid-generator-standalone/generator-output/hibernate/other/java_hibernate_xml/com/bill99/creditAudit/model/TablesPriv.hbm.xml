@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.bill99.creditAudit.model">
+    <class name="TablesPriv" table="tables_priv">
+
+		
+        <composite-id>
+        	<key-property name="host" type="java.lang.String" column="Host"/>
+        	<key-property name="db" type="java.lang.String" column="Db"/>
+        	<key-property name="user" type="java.lang.String" column="User"/>
+        	<key-property name="tableName" type="java.lang.String" column="Table_name"/>
+        </composite-id>
+		
+		
+		<property 
+			name="grantor" 
+			column="Grantor" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="77"/>
+		
+		<property 
+			name="timestamp" 
+			column="Timestamp" 
+			update="true"
+            insert="true"
+            type="java.util.Date"
+			not-null="false" 
+			unique="false" 
+			length="0"/>
+		
+		<property 
+			name="tablePriv" 
+			column="Table_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="62"/>
+		
+		<property 
+			name="columnPriv" 
+			column="Column_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="31"/>
+		
+		<!-- One-To-Many attributes -->
+
+		<!-- Many-To-One attributes -->
+
+    </class>
+</hibernate-mapping>
+

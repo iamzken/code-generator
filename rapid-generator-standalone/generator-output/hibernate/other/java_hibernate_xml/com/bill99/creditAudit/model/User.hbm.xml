@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.bill99.creditAudit.model">
+    <class name="User" table="user">
+
+		
+        <composite-id>
+        	<key-property name="host" type="java.lang.String" column="Host"/>
+        	<key-property name="user" type="java.lang.String" column="User"/>
+        </composite-id>
+		
+		
+		<property 
+			name="password" 
+			column="password" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="16"/>
+		
+		<property 
+			name="selectPriv" 
+			column="Select_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="insertPriv" 
+			column="Insert_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="updatePriv" 
+			column="Update_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="deletePriv" 
+			column="Delete_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="createPriv" 
+			column="Create_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="dropPriv" 
+			column="Drop_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="reloadPriv" 
+			column="Reload_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="shutdownPriv" 
+			column="Shutdown_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="processPriv" 
+			column="Process_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="filePriv" 
+			column="File_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="grantPriv" 
+			column="Grant_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="referencesPriv" 
+			column="References_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="indexPriv" 
+			column="Index_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="alterPriv" 
+			column="Alter_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="showDbPriv" 
+			column="Show_db_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="superPriv" 
+			column="Super_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="createTmpTablePriv" 
+			column="Create_tmp_table_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="lockTablesPriv" 
+			column="Lock_tables_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="executePriv" 
+			column="Execute_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="replSlavePriv" 
+			column="Repl_slave_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="replClientPriv" 
+			column="Repl_client_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="sslType" 
+			column="ssl_type" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="9"/>
+		
+		<property 
+			name="sslCipher" 
+			column="ssl_cipher" 
+			update="true"
+            insert="true"
+            type="byte[]"
+			not-null="true" 
+			unique="false" 
+			length="65535"/>
+		
+		<property 
+			name="x509Issuer" 
+			column="x509_issuer" 
+			update="true"
+            insert="true"
+            type="byte[]"
+			not-null="true" 
+			unique="false" 
+			length="65535"/>
+		
+		<property 
+			name="x509Subject" 
+			column="x509_subject" 
+			update="true"
+            insert="true"
+            type="byte[]"
+			not-null="true" 
+			unique="false" 
+			length="65535"/>
+		
+		<property 
+			name="maxQuestions" 
+			column="max_questions" 
+			update="true"
+            insert="true"
+            type="java.lang.Integer"
+			not-null="true" 
+			unique="false" 
+			length="10"/>
+		
+		<property 
+			name="maxUpdates" 
+			column="max_updates" 
+			update="true"
+            insert="true"
+            type="java.lang.Integer"
+			not-null="true" 
+			unique="false" 
+			length="10"/>
+		
+		<property 
+			name="maxConnections" 
+			column="max_connections" 
+			update="true"
+            insert="true"
+            type="java.lang.Integer"
+			not-null="true" 
+			unique="false" 
+			length="10"/>
+		
+		<!-- One-To-Many attributes -->
+
+		<!-- Many-To-One attributes -->
+
+    </class>
+</hibernate-mapping>
+

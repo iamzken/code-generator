@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.bill99.creditAudit.model">
+    <class name="Db" table="db">
+
+		
+        <composite-id>
+        	<key-property name="host" type="java.lang.String" column="Host"/>
+        	<key-property name="db" type="java.lang.String" column="Db"/>
+        	<key-property name="user" type="java.lang.String" column="User"/>
+        </composite-id>
+		
+		
+		<property 
+			name="selectPriv" 
+			column="Select_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="insertPriv" 
+			column="Insert_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="updatePriv" 
+			column="Update_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="deletePriv" 
+			column="Delete_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="createPriv" 
+			column="Create_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="dropPriv" 
+			column="Drop_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="grantPriv" 
+			column="Grant_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="referencesPriv" 
+			column="References_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="indexPriv" 
+			column="Index_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="alterPriv" 
+			column="Alter_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="createTmpTablePriv" 
+			column="Create_tmp_table_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<property 
+			name="lockTablesPriv" 
+			column="Lock_tables_priv" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="2"/>
+		
+		<!-- One-To-Many attributes -->
+
+		<!-- Many-To-One attributes -->
+
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.Host" class="com.bill99.creditAudit.model.Host">
+        <result property="host" column="Host"/>
+        <result property="db" column="Db"/>
+        <result property="selectPriv" column="Select_priv"/>
+        <result property="insertPriv" column="Insert_priv"/>
+        <result property="updatePriv" column="Update_priv"/>
+        <result property="deletePriv" column="Delete_priv"/>
+        <result property="createPriv" column="Create_priv"/>
+        <result property="dropPriv" column="Drop_priv"/>
+        <result property="grantPriv" column="Grant_priv"/>
+        <result property="referencesPriv" column="References_priv"/>
+        <result property="indexPriv" column="Index_priv"/>
+        <result property="alterPriv" column="Alter_priv"/>
+        <result property="createTmpTablePriv" column="Create_tmp_table_priv"/>
+        <result property="lockTablesPriv" column="Lock_tables_priv"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Host.columns">
+	    <![CDATA[
+        Host ,Db ,Select_priv ,Insert_priv ,Update_priv ,Delete_priv ,Create_priv ,Drop_priv ,Grant_priv ,References_priv ,Index_priv ,Alter_priv ,Create_tmp_table_priv ,Lock_tables_priv 
+	    ]]>
+	</sql>
+	
+    <insert id="Host.insert" >
+    <![CDATA[
+        INSERT INTO host (
+        	Host ,
+        	Db ,
+        	Select_priv ,
+        	Insert_priv ,
+        	Update_priv ,
+        	Delete_priv ,
+        	Create_priv ,
+        	Drop_priv ,
+        	Grant_priv ,
+        	References_priv ,
+        	Index_priv ,
+        	Alter_priv ,
+        	Create_tmp_table_priv ,
+        	Lock_tables_priv 
+        ) VALUES (
+        	#host# ,
+        	#db# ,
+        	#selectPriv# ,
+        	#insertPriv# ,
+        	#updatePriv# ,
+        	#deletePriv# ,
+        	#createPriv# ,
+        	#dropPriv# ,
+        	#grantPriv# ,
+        	#referencesPriv# ,
+        	#indexPriv# ,
+        	#alterPriv# ,
+        	#createTmpTablePriv# ,
+        	#lockTablesPriv# 
+        )
+    ]]>
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        <selectKey resultClass="java.lang.Long" type="post" keyProperty="hostdb" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="Host.update" >
+    <![CDATA[
+        UPDATE host SET
+	        Select_priv = #selectPriv# ,
+	        Insert_priv = #insertPriv# ,
+	        Update_priv = #updatePriv# ,
+	        Delete_priv = #deletePriv# ,
+	        Create_priv = #createPriv# ,
+	        Drop_priv = #dropPriv# ,
+	        Grant_priv = #grantPriv# ,
+	        References_priv = #referencesPriv# ,
+	        Index_priv = #indexPriv# ,
+	        Alter_priv = #alterPriv# ,
+	        Create_tmp_table_priv = #createTmpTablePriv# ,
+	        Lock_tables_priv = #lockTablesPriv# 
+        WHERE 
+	        Host = #host# ,
+	        Db = #db# 
+    ]]>
+    </update>
+
+    <delete id="Host.delete">
+    <![CDATA[
+        DELETE FROM host WHERE
+        Host = #host# ,
+        Db = #db# 
+    ]]>
+    </delete>
+    
+    <select id="Host.getById" resultMap="RM.Host">
+	    SELECT <include refid="Host.columns"/>
+	    <![CDATA[
+	        FROM host 
+	        WHERE 
+		        Host = #host# ,
+		        Db = #db# 
+	    ]]>
+    </select>
+
+	<sql id="Host.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="host">
+		             Host = #host#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="db">
+		             Db = #db#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="selectPriv">
+		             Select_priv = #selectPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="insertPriv">
+		             Insert_priv = #insertPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updatePriv">
+		             Update_priv = #updatePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="deletePriv">
+		             Delete_priv = #deletePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createPriv">
+		             Create_priv = #createPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="dropPriv">
+		             Drop_priv = #dropPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="grantPriv">
+		             Grant_priv = #grantPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="referencesPriv">
+		             References_priv = #referencesPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="indexPriv">
+		             Index_priv = #indexPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="alterPriv">
+		             Alter_priv = #alterPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTmpTablePriv">
+		             Create_tmp_table_priv = #createTmpTablePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="lockTablesPriv">
+		             Lock_tables_priv = #lockTablesPriv#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="Host.findPage.count" resultClass="long">
+        SELECT count(*) FROM host <include refid="Host.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="Host.findPage" resultMap="RM.Host">
+    	SELECT <include refid="Host.columns"/> FROM host 
+		<include refid="Host.findPage.where"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+
+	
+</sqlMap>
+

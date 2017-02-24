@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.bill99.creditAudit.model">
+    <class name="Func" table="func">
+
+        <id name="name" column="name" type="java.lang.String">
+            <generator class="increment"/>
+        </id>
+		
+		
+		
+		<property 
+			name="ret" 
+			column="ret" 
+			update="true"
+            insert="true"
+            type="java.lang.Boolean"
+			not-null="true" 
+			unique="false" 
+			length="0"/>
+		
+		<property 
+			name="dl" 
+			column="dl" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="128"/>
+		
+		<property 
+			name="type" 
+			column="type" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="true" 
+			unique="false" 
+			length="9"/>
+		
+		<!-- One-To-Many attributes -->
+
+		<!-- Many-To-One attributes -->
+
+    </class>
+</hibernate-mapping>
+

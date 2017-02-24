@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.User" class="com.bill99.creditAudit.model.User">
+        <result property="host" column="Host"/>
+        <result property="user" column="User"/>
+        <result property="password" column="password"/>
+        <result property="selectPriv" column="Select_priv"/>
+        <result property="insertPriv" column="Insert_priv"/>
+        <result property="updatePriv" column="Update_priv"/>
+        <result property="deletePriv" column="Delete_priv"/>
+        <result property="createPriv" column="Create_priv"/>
+        <result property="dropPriv" column="Drop_priv"/>
+        <result property="reloadPriv" column="Reload_priv"/>
+        <result property="shutdownPriv" column="Shutdown_priv"/>
+        <result property="processPriv" column="Process_priv"/>
+        <result property="filePriv" column="File_priv"/>
+        <result property="grantPriv" column="Grant_priv"/>
+        <result property="referencesPriv" column="References_priv"/>
+        <result property="indexPriv" column="Index_priv"/>
+        <result property="alterPriv" column="Alter_priv"/>
+        <result property="showDbPriv" column="Show_db_priv"/>
+        <result property="superPriv" column="Super_priv"/>
+        <result property="createTmpTablePriv" column="Create_tmp_table_priv"/>
+        <result property="lockTablesPriv" column="Lock_tables_priv"/>
+        <result property="executePriv" column="Execute_priv"/>
+        <result property="replSlavePriv" column="Repl_slave_priv"/>
+        <result property="replClientPriv" column="Repl_client_priv"/>
+        <result property="sslType" column="ssl_type"/>
+        <result property="sslCipher" column="ssl_cipher"/>
+        <result property="x509Issuer" column="x509_issuer"/>
+        <result property="x509Subject" column="x509_subject"/>
+        <result property="maxQuestions" column="max_questions"/>
+        <result property="maxUpdates" column="max_updates"/>
+        <result property="maxConnections" column="max_connections"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="User.columns">
+	    <![CDATA[
+        Host ,User ,password ,Select_priv ,Insert_priv ,Update_priv ,Delete_priv ,Create_priv ,Drop_priv ,Reload_priv ,Shutdown_priv ,Process_priv ,File_priv ,Grant_priv ,References_priv ,Index_priv ,Alter_priv ,Show_db_priv ,Super_priv ,Create_tmp_table_priv ,Lock_tables_priv ,Execute_priv ,Repl_slave_priv ,Repl_client_priv ,ssl_type ,ssl_cipher ,x509_issuer ,x509_subject ,max_questions ,max_updates ,max_connections 
+	    ]]>
+	</sql>
+	
+    <insert id="User.insert" >
+    <![CDATA[
+        INSERT INTO user (
+        	Host ,
+        	User ,
+        	password ,
+        	Select_priv ,
+        	Insert_priv ,
+        	Update_priv ,
+        	Delete_priv ,
+        	Create_priv ,
+        	Drop_priv ,
+        	Reload_priv ,
+        	Shutdown_priv ,
+        	Process_priv ,
+        	File_priv ,
+        	Grant_priv ,
+        	References_priv ,
+        	Index_priv ,
+        	Alter_priv ,
+        	Show_db_priv ,
+        	Super_priv ,
+        	Create_tmp_table_priv ,
+        	Lock_tables_priv ,
+        	Execute_priv ,
+        	Repl_slave_priv ,
+        	Repl_client_priv ,
+        	ssl_type ,
+        	ssl_cipher ,
+        	x509_issuer ,
+        	x509_subject ,
+        	max_questions ,
+        	max_updates ,
+        	max_connections 
+        ) VALUES (
+        	#host# ,
+        	#user# ,
+        	#password# ,
+        	#selectPriv# ,
+        	#insertPriv# ,
+        	#updatePriv# ,
+        	#deletePriv# ,
+        	#createPriv# ,
+        	#dropPriv# ,
+        	#reloadPriv# ,
+        	#shutdownPriv# ,
+        	#processPriv# ,
+        	#filePriv# ,
+        	#grantPriv# ,
+        	#referencesPriv# ,
+        	#indexPriv# ,
+        	#alterPriv# ,
+        	#showDbPriv# ,
+        	#superPriv# ,
+        	#createTmpTablePriv# ,
+        	#lockTablesPriv# ,
+        	#executePriv# ,
+        	#replSlavePriv# ,
+        	#replClientPriv# ,
+        	#sslType# ,
+        	#sslCipher# ,
+        	#x509Issuer# ,
+        	#x509Subject# ,
+        	#maxQuestions# ,
+        	#maxUpdates# ,
+        	#maxConnections# 
+        )
+    ]]>
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        <selectKey resultClass="java.lang.Long" type="post" keyProperty="hostuser" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="User.update" >
+    <![CDATA[
+        UPDATE user SET
+	        password = #password# ,
+	        Select_priv = #selectPriv# ,
+	        Insert_priv = #insertPriv# ,
+	        Update_priv = #updatePriv# ,
+	        Delete_priv = #deletePriv# ,
+	        Create_priv = #createPriv# ,
+	        Drop_priv = #dropPriv# ,
+	        Reload_priv = #reloadPriv# ,
+	        Shutdown_priv = #shutdownPriv# ,
+	        Process_priv = #processPriv# ,
+	        File_priv = #filePriv# ,
+	        Grant_priv = #grantPriv# ,
+	        References_priv = #referencesPriv# ,
+	        Index_priv = #indexPriv# ,
+	        Alter_priv = #alterPriv# ,
+	        Show_db_priv = #showDbPriv# ,
+	        Super_priv = #superPriv# ,
+	        Create_tmp_table_priv = #createTmpTablePriv# ,
+	        Lock_tables_priv = #lockTablesPriv# ,
+	        Execute_priv = #executePriv# ,
+	        Repl_slave_priv = #replSlavePriv# ,
+	        Repl_client_priv = #replClientPriv# ,
+	        ssl_type = #sslType# ,
+	        ssl_cipher = #sslCipher# ,
+	        x509_issuer = #x509Issuer# ,
+	        x509_subject = #x509Subject# ,
+	        max_questions = #maxQuestions# ,
+	        max_updates = #maxUpdates# ,
+	        max_connections = #maxConnections# 
+        WHERE 
+	        Host = #host# ,
+	        User = #user# 
+    ]]>
+    </update>
+
+    <delete id="User.delete">
+    <![CDATA[
+        DELETE FROM user WHERE
+        Host = #host# ,
+        User = #user# 
+    ]]>
+    </delete>
+    
+    <select id="User.getById" resultMap="RM.User">
+	    SELECT <include refid="User.columns"/>
+	    <![CDATA[
+	        FROM user 
+	        WHERE 
+		        Host = #host# ,
+		        User = #user# 
+	    ]]>
+    </select>
+
+	<sql id="User.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="host">
+		             Host = #host#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="user">
+		             User = #user#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="password">
+		             password = #password#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="selectPriv">
+		             Select_priv = #selectPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="insertPriv">
+		             Insert_priv = #insertPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="updatePriv">
+		             Update_priv = #updatePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="deletePriv">
+		             Delete_priv = #deletePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createPriv">
+		             Create_priv = #createPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="dropPriv">
+		             Drop_priv = #dropPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="reloadPriv">
+		             Reload_priv = #reloadPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="shutdownPriv">
+		             Shutdown_priv = #shutdownPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="processPriv">
+		             Process_priv = #processPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="filePriv">
+		             File_priv = #filePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="grantPriv">
+		             Grant_priv = #grantPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="referencesPriv">
+		             References_priv = #referencesPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="indexPriv">
+		             Index_priv = #indexPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="alterPriv">
+		             Alter_priv = #alterPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="showDbPriv">
+		             Show_db_priv = #showDbPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="superPriv">
+		             Super_priv = #superPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="createTmpTablePriv">
+		             Create_tmp_table_priv = #createTmpTablePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="lockTablesPriv">
+		             Lock_tables_priv = #lockTablesPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="executePriv">
+		             Execute_priv = #executePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="replSlavePriv">
+		             Repl_slave_priv = #replSlavePriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="replClientPriv">
+		             Repl_client_priv = #replClientPriv#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="sslType">
+		             ssl_type = #sslType#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="sslCipher">
+		             ssl_cipher = #sslCipher#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="x509Issuer">
+		             x509_issuer = #x509Issuer#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="x509Subject">
+		             x509_subject = #x509Subject#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="maxQuestions">
+		             max_questions = #maxQuestions#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="maxUpdates">
+		             max_updates = #maxUpdates#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="maxConnections">
+		             max_connections = #maxConnections#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="User.findPage.count" resultClass="long">
+        SELECT count(*) FROM user <include refid="User.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="User.findPage" resultMap="RM.User">
+    	SELECT <include refid="User.columns"/> FROM user 
+		<include refid="User.findPage.where"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+
+	
+</sqlMap>
+

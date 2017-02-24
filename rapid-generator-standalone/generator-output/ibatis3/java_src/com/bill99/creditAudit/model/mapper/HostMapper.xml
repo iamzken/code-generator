@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="Host">
+
+	<resultMap id="RM.Host" type="com.bill99.creditAudit.model.Host">
+        <result property="host" column="Host"/>
+        <result property="db" column="Db"/>
+        <result property="selectPriv" column="Select_priv"/>
+        <result property="insertPriv" column="Insert_priv"/>
+        <result property="updatePriv" column="Update_priv"/>
+        <result property="deletePriv" column="Delete_priv"/>
+        <result property="createPriv" column="Create_priv"/>
+        <result property="dropPriv" column="Drop_priv"/>
+        <result property="grantPriv" column="Grant_priv"/>
+        <result property="referencesPriv" column="References_priv"/>
+        <result property="indexPriv" column="Index_priv"/>
+        <result property="alterPriv" column="Alter_priv"/>
+        <result property="createTmpTablePriv" column="Create_tmp_table_priv"/>
+        <result property="lockTablesPriv" column="Lock_tables_priv"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Host.columns">
+	    <![CDATA[
+		Host,Db,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv,Grant_priv,References_priv,Index_priv,Alter_priv,Create_tmp_table_priv,Lock_tables_priv
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="Host.insert" useGeneratedKeys="true" keyProperty="host">
+    <![CDATA[
+        INSERT INTO host (
+        	Host ,
+        	Db ,
+        	Select_priv ,
+        	Insert_priv ,
+        	Update_priv ,
+        	Delete_priv ,
+        	Create_priv ,
+        	Drop_priv ,
+        	Grant_priv ,
+        	References_priv ,
+        	Index_priv ,
+        	Alter_priv ,
+        	Create_tmp_table_priv ,
+        	Lock_tables_priv 
+        ) VALUES (
+        	#{host} ,
+        	#{db} ,
+        	#{selectPriv} ,
+        	#{insertPriv} ,
+        	#{updatePriv} ,
+        	#{deletePriv} ,
+        	#{createPriv} ,
+        	#{dropPriv} ,
+        	#{grantPriv} ,
+        	#{referencesPriv} ,
+        	#{indexPriv} ,
+        	#{alterPriv} ,
+        	#{createTmpTablePriv} ,
+        	#{lockTablesPriv} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="Host.update" >
+    <![CDATA[
+        UPDATE host SET
+	        Select_priv = #{selectPriv} ,
+	        Insert_priv = #{insertPriv} ,
+	        Update_priv = #{updatePriv} ,
+	        Delete_priv = #{deletePriv} ,
+	        Create_priv = #{createPriv} ,
+	        Drop_priv = #{dropPriv} ,
+	        Grant_priv = #{grantPriv} ,
+	        References_priv = #{referencesPriv} ,
+	        Index_priv = #{indexPriv} ,
+	        Alter_priv = #{alterPriv} ,
+	        Create_tmp_table_priv = #{createTmpTablePriv} ,
+	        Lock_tables_priv = #{lockTablesPriv} 
+        WHERE 
+	        Host = #{host} ,
+	        Db = #{db} 
+    ]]>
+	</update>
+
+    <delete id="Host.delete">
+    <![CDATA[
+        DELETE FROM host WHERE
+        Host = #{id} ,
+        Db = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="Host.getById" resultMap="RM.Host">
+		SELECT <include refid="Host.columns" />
+	    <![CDATA[
+		    FROM host 
+	        WHERE 
+		        Host = #{id} ,
+		        Db = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="Host.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(host)">
+				AND Host = #{host}
+			</if>
+	       <if test="@Ognl@isNotEmpty(db)">
+				AND Db = #{db}
+			</if>
+	       <if test="@Ognl@isNotEmpty(selectPriv)">
+				AND Select_priv = #{selectPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(insertPriv)">
+				AND Insert_priv = #{insertPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(updatePriv)">
+				AND Update_priv = #{updatePriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(deletePriv)">
+				AND Delete_priv = #{deletePriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createPriv)">
+				AND Create_priv = #{createPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(dropPriv)">
+				AND Drop_priv = #{dropPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(grantPriv)">
+				AND Grant_priv = #{grantPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(referencesPriv)">
+				AND References_priv = #{referencesPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(indexPriv)">
+				AND Index_priv = #{indexPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(alterPriv)">
+				AND Alter_priv = #{alterPriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(createTmpTablePriv)">
+				AND Create_tmp_table_priv = #{createTmpTablePriv}
+			</if>
+	       <if test="@Ognl@isNotEmpty(lockTablesPriv)">
+				AND Lock_tables_priv = #{lockTablesPriv}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="Host.findPage.count" resultType="long">
+        SELECT count(*) FROM host 
+		<include refid="Host.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="Host.findPage" resultMap="RM.Host">
+    	SELECT <include refid="Host.columns" />
+	    FROM host 
+		<include refid="Host.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>
+

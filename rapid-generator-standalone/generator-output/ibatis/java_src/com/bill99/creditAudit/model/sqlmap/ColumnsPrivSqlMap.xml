@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+
+<!-- 不使用namespace是由于sql搜索定位会比较方便 -->
+<sqlMap>
+
+    <resultMap id="RM.ColumnsPriv" class="com.bill99.creditAudit.model.ColumnsPriv">
+        <result property="host" column="Host"/>
+        <result property="db" column="Db"/>
+        <result property="user" column="User"/>
+        <result property="tableName" column="Table_name"/>
+        <result property="columnName" column="Column_name"/>
+        <result property="timestamp" column="Timestamp"/>
+        <result property="columnPriv" column="Column_priv"/>
+    </resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="ColumnsPriv.columns">
+	    <![CDATA[
+        Host ,Db ,User ,Table_name ,Column_name ,Timestamp ,Column_priv 
+	    ]]>
+	</sql>
+	
+    <insert id="ColumnsPriv.insert" >
+    <![CDATA[
+        INSERT INTO columns_priv (
+        	Host ,
+        	Db ,
+        	User ,
+        	Table_name ,
+        	Column_name ,
+        	Timestamp ,
+        	Column_priv 
+        ) VALUES (
+        	#host# ,
+        	#db# ,
+        	#user# ,
+        	#tableName# ,
+        	#columnName# ,
+        	#timestamp# ,
+        	#columnPriv# 
+        )
+    ]]>
+    <!--
+    mysql:		type="post" SELECT  select last_insert_id()
+    sqlserver:	type="post" SELECT  @@identity  AS  ID
+    oracle:		type="pre" 	SELECT  sequenceName.nextval AS ID FROM DUAL
+    DB2:		type="pre"	values nextval for sequenceName
+    -->
+        <selectKey resultClass="java.lang.Long" type="post" keyProperty="hostdbusertableNamecolumnName" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="ColumnsPriv.update" >
+    <![CDATA[
+        UPDATE columns_priv SET
+	        Timestamp = #timestamp# ,
+	        Column_priv = #columnPriv# 
+        WHERE 
+	        Host = #host# ,
+	        Db = #db# ,
+	        User = #user# ,
+	        Table_name = #tableName# ,
+	        Column_name = #columnName# 
+    ]]>
+    </update>
+
+    <delete id="ColumnsPriv.delete">
+    <![CDATA[
+        DELETE FROM columns_priv WHERE
+        Host = #host# ,
+        Db = #db# ,
+        User = #user# ,
+        Table_name = #tableName# ,
+        Column_name = #columnName# 
+    ]]>
+    </delete>
+    
+    <select id="ColumnsPriv.getById" resultMap="RM.ColumnsPriv">
+	    SELECT <include refid="ColumnsPriv.columns"/>
+	    <![CDATA[
+	        FROM columns_priv 
+	        WHERE 
+		        Host = #host# ,
+		        Db = #db# ,
+		        User = #user# ,
+		        Table_name = #tableName# ,
+		        Column_name = #columnName# 
+	    ]]>
+    </select>
+
+	<sql id="ColumnsPriv.findPage.where">
+	    <dynamic prepend="WHERE">
+		       <isNotEmpty prepend="AND" property="host">
+		             Host = #host#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="db">
+		             Db = #db#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="user">
+		             User = #user#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="tableName">
+		             Table_name = #tableName#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="columnName">
+		             Column_name = #columnName#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="timestampBegin">
+		             Timestamp >= #timestampBegin#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="timestampEnd">
+		             Timestamp &lt;= #timestampEnd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="columnPriv">
+		             Column_priv = #columnPriv#
+		       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	 
+    <select id="ColumnsPriv.findPage.count" resultClass="long">
+        SELECT count(*) FROM columns_priv <include refid="ColumnsPriv.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="ColumnsPriv.findPage" resultMap="RM.ColumnsPriv">
+    	SELECT <include refid="ColumnsPriv.columns"/> FROM columns_priv 
+		<include refid="ColumnsPriv.findPage.where"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+
+	
+</sqlMap>
+
